@@ -1,0 +1,66 @@
+name: Assign All Reviewers
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  assign-reviewer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Repository Members and Assign Reviewers
+        run: |
+          set -e # 오류 발생 시 즉시 종료
+          echo "===== 모든 리뷰어 할당 작업 시작 ====="
+
+          # PR 작성자 가져오기
+          author="${{ github.actor }}"
+          echo "PR 작성자: $author"
+
+          # 레포지토리의 멤버 목록 가져오기
+          members_response=$(curl -s -X GET \
+            -H "Authorization: token ${{ secrets.REVIEWER_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/collaborators")
+
+          # API 응답이 유효한 JSON인지 확인
+          if ! echo "$members_response" | jq empty; then
+            echo "❌ GitHub API 응답이 올바른 JSON 형식이 아닙니다."
+            echo "응답 내용: $members_response"
+            exit 1
+          fi
+
+          # 멤버 리스트 파싱 (PR 작성자는 제외)
+          reviewers=$(echo "$members_response" | jq -r '.[].login' | grep -v "^$author$" | jq -R -s -c 'split("\n")[:-1]')
+
+          # 리뷰어 목록이 비어 있을 경우 처리
+          if [ -z "$reviewers" ] || [ "$reviewers" == "[]" ]; then
+            echo "⚠️ PR 작성자를 제외한 리뷰어가 없습니다. 리뷰어를 할당하지 않습니다."
+            exit 0
+          fi
+
+          # 리뷰어 목록 확인
+          echo "✅ 최종 선택된 리뷰어(JSON): $reviewers"
+
+          # PR 번호 가져오기
+          pr_number=${{ github.event.pull_request.number }}
+          if [ -z "$pr_number" ]; then
+            echo "❌ PR 번호를 가져올 수 없습니다."
+            exit 1
+          fi
+
+          # GitHub API를 사용하여 리뷰어 할당
+          response=$(curl -s -X POST \
+            -H "Authorization: token ${{ secrets.REVIEWER_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d "{\"reviewers\": $reviewers}" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number/requested_reviewers")
+
+          # GitHub API 응답 검사
+          if echo "$response" | grep -q '"errors"'; then
+            echo "❌ 리뷰어 할당 중 오류 발생."
+            echo "오류 내용: $response"
+            exit 1
+          fi
+
+          echo "🎉 ✅ 모든 리뷰어가 성공적으로 할당되었습니다!"
+          echo "===== 모든 리뷰어 할당 작업 종료 ====="
