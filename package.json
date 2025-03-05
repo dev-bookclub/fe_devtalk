@@ -1,0 +1,19 @@
+{
+  "name": "fe_devtalk",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "postinstall": "sh setup.sh commit-lint",
+    "commit-lint": "git config commit.template .git-commit-template",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "husky": "^8.0.0"
+  }
+}
