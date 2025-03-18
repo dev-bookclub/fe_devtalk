@@ -20,7 +20,7 @@ jobs:
           members_response=$(curl -s -X GET \
             -H "Authorization: token ${{ secrets.REVIEWER_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/collaborators")
+            "GET https://api.github.com/repos/dev-bookclub/fe_devtalk/collaborators?affiliation=direct")
 
           # API 응답이 유효한 JSON인지 확인
           if ! echo "$members_response" | jq empty; then
@@ -30,7 +30,8 @@ jobs:
           fi
 
           # 멤버 리스트 파싱 (PR 작성자는 제외)
-          reviewers=$(echo "$members_response" | jq -r '.[].login' | grep -v "^$author$" | jq -R -s -c 'split("\n")[:-1]')
+          reviewers=$(echo "$members_response" | jq -r --arg author "$author" '[.[].login | select(. != $author)]')
+          echo "리뷰어 목록: $reviewers"
 
           # 리뷰어 목록이 비어 있을 경우 처리
           if [ -z "$reviewers" ] || [ "$reviewers" == "[]" ]; then
