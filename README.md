@@ -11,6 +11,7 @@
 ## 📖 학습 가이드
 
 🔗 [1. 빌드시스템](https://github.com/dev-bookclub/fe_devtalk/wiki/1%EC%A3%BC%EC%B0%A8-%ED%95%99%EC%8A%B5-%EA%B0%80%EC%9D%B4%EB%93%9C)
+🔗 [2. 릴리즈 노트 분석 훈련](https://github.com/dev-bookclub/fe_devtalk/wiki/1%EC%A3%BC%EC%B0%A8-%ED%95%99%EC%8A%B5-%EA%B0%80%EC%9D%B4%EB%93%9C)
 <br/>
 
 ## 🔄 진행 방식
