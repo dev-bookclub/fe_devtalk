@@ -10,8 +10,8 @@
 
 ## 📖 학습 가이드
 
-🔗 [1. 빌드시스템](https://github.com/dev-bookclub/fe_devtalk/wiki/1%EC%A3%BC%EC%B0%A8-%ED%95%99%EC%8A%B5-%EA%B0%80%EC%9D%B4%EB%93%9C)
-🔗 [2. 릴리즈 노트 분석 훈련](https://github.com/dev-bookclub/fe_devtalk/wiki/1%EC%A3%BC%EC%B0%A8-%ED%95%99%EC%8A%B5-%EA%B0%80%EC%9D%B4%EB%93%9C)
+🔗 [1. 빌드시스템](https://github.com/dev-bookclub/fe_devtalk/blob/main/_guide/%EB%B9%8C%EB%93%9C%EC%8B%9C%EC%8A%A4%ED%85%9C.md)<br/>
+🔗 [2. 릴리즈 노트 분석 훈련](https://github.com/dev-bookclub/fe_devtalk/blob/main/_guide/%EB%A6%B4%EB%A6%AC%EC%A6%88%20%EB%85%B8%ED%8A%B8%20%EB%B6%84%EC%84%9D%20%ED%9B%88%EB%A0%A8.md)
 <br/>
 
 ## 🔄 진행 방식
