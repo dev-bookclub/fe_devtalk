@@ -1,7 +1,7 @@
 name: Assign All Reviewers
 on:
   pull_request:
-    types: [opened, ready_for_review]
+    types: [opened, ready_for_review, reopened]
 
 jobs:
   assign-reviewer:
@@ -20,7 +20,7 @@ jobs:
           members_response=$(curl -s -X GET \
             -H "Authorization: token ${{ secrets.REVIEWER_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
-            "GET https://api.github.com/repos/dev-bookclub/fe_devtalk/collaborators?affiliation=direct")
+            "https://api.github.com/repos/dev-bookclub/fe_devtalk/collaborators?affiliation=direct")
 
           # API 응답이 유효한 JSON인지 확인
           if ! echo "$members_response" | jq empty; then
