@@ -13,6 +13,9 @@
 🔗 [1. 빌드시스템](https://github.com/dev-bookclub/fe_devtalk/blob/main/_guide/%EB%B9%8C%EB%93%9C%EC%8B%9C%EC%8A%A4%ED%85%9C.md)<br/>
 🔗 [2. 릴리즈 노트 분석 훈련](https://github.com/dev-bookclub/fe_devtalk/blob/main/_guide/%EB%A6%B4%EB%A6%AC%EC%A6%88%20%EB%85%B8%ED%8A%B8%20%EB%B6%84%EC%84%9D%20%ED%9B%88%EB%A0%A8.md)
 <br/>
+🔗 [3. 서버 사이드 렌더링](https://github.com/dev-bookclub/fe_devtalk/blob/main/_guide/%EC%84%9C%EB%B2%84%20%EC%82%AC%EC%9D%B4%EB%93%9C%20%EB%A0%8C%EB%8D%94%EB%A7%81.md)
+
+<br/>
 
 ## 🔄 진행 방식
 
